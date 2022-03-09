@@ -3,7 +3,7 @@ EXE     :=hurricane
 CC      :=g++
 CFLAGS  := -Wall -Werror -Wuninitialized -Wunused
 LDFLAGS := 
-LIBS    := 
+LIBS    := -lssl -lcrypto
 
 # Project directory structure
 BIN_DIR := bin
@@ -15,7 +15,7 @@ SRCS := $(shell find $(SRC_DIR) -name *.cpp)
 HPPS := $(shell find $(SRC_DIR) -name *.hpp)
 OBJS := $(subst $(SRC_DIR)/,$(OBJ_DIR)/,$(addsuffix .o,$(basename $(SRCS))))
 
-.PHONY: info clean mrproper all
+.PHONY: info clean mrproper all test
 
 # Main task
 all: $(BIN_DIR)/$(EXE)
@@ -31,7 +31,10 @@ $(BIN_DIR)/$(EXE): $(OBJS) $(HPPS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INC_FLAGS) -c -o $@ $<
-	
+
+test: $(BIN_DIR)/$(EXE)
+	@python test.py $(BIN_DIR)/$(EXE)
+
 # clean project
 clean:
 	@echo "[*] Clean project"
