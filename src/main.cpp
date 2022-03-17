@@ -14,7 +14,7 @@ void usage(char ** argv){
     std::cout << "Commands : " << std::endl;
     std::cout << "\tchecksum <file1> [ <file2> [...]]\t\tdisplay files checksum" << std::endl;
     std::cout << "\tradare <database> <file1> [ <file2> [...]] \tChecks if files have a footprint in the database" << std::endl;
-    std::cout << "\tradare <database> -r <basedir>\t\tChecks if files in a directory (recursively) have a footprint in the database" << std::endl;
+    std::cout << "\tradare <database> -r <basedir>\t\t\tChecks if files in a directory (recursively) have a footprint in the database" << std::endl;
 }
 
 int main(int argc, char ** argv){

@@ -20,6 +20,12 @@ radare <database> <file1> [ <file2> [...]]
 hurricane radare ./test/radar_database/db1.txt ./test/checksum/*.test
 ```
 
+Use recursive mode for radare:
+```
+radare <database> -r <basedir>
+hurricane radare ./test/radar_database/db1.txt -r /
+```
+
 ## Project build
 
 Get information about compilation settings :
