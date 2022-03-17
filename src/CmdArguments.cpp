@@ -40,6 +40,16 @@ bool CmdArguments::parseRadare(int argc, char ** argv){
 
     this->dbPath = std::string{argv[2]};
 
+    if(std::string{argv[3]} == "-r"){
+        if(argc != 5){
+            return RETURN_ERROR;
+        }
+        this->requestRecursive = true;
+        this->recursiveBasedir = std::string{argv[4]};
+        
+        return RETURN_OK;
+    }
+
     for(int i = 3 ; i < argc ; i++){
         this->filesTargeted.push_back(argv[i]);
     }
@@ -54,10 +64,19 @@ std::vector<std::string> CmdArguments::getFilesTargeted(){
 std::string CmdArguments::getDatabasePath(){
     return this->dbPath ;
 }
+
+std::string CmdArguments::getRecursiveBaseDir(){
+    return this->recursiveBasedir;
+}
+
 bool CmdArguments::getChecksumCmdFlag(){
     return this->requestChecksum;
 }
 
 bool CmdArguments::getRadareCmdFlag(){
     return this->requestRadare;
+}
+
+bool CmdArguments::getRecursiveFlag(){
+    return this->requestRecursive;
 }
