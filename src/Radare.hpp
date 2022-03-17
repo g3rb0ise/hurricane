@@ -10,15 +10,24 @@
     class Radare{
         public:
             /**
-            * @param[in] files : set of files to check
+            * @param[in] db : footprint datase
             */
-            explicit Radare(std::vector<std::string> * files,CSVFilesDatabase * db);
+            explicit Radare(CSVFilesDatabase * db);
 
             /**
-            * Scan all files in database
+            * Scan all files in parameters and check if file footprint is on datavase
+            *
+            * @param[in] files to scan
             */
-            void runScan();
+            void runScan(std::vector<std::string> files);
             
+            /**
+            * Scan all files in a directory (recursively) and check if file footprint is on datavase
+            *
+            * @param[in] basedir : directory path 
+            */
+            void runScanInDirectory(std::string basedir);
+
         protected:
             std::vector<std::string> * files;
             CSVFilesDatabase * db;

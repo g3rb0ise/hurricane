@@ -1,13 +1,13 @@
 # hurricane
 
-The Hurricane tool allows to analyze the files of a system with their fingerprint. 
+The Hurricane tool allows to analyze the files of a system with their footprints. 
 
 ## Project organization
 
 The project follows the git-flow model.
 
 ## Usage
-The checkum command displays the fingerprints of the files in parameters : 
+The checkum command displays the footprints of the files in parameters : 
 
 ```
 hurricane checksum <file1> [ <file2> [...]]

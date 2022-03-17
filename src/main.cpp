@@ -12,8 +12,9 @@ void usage(char ** argv){
 
     std::cout << "Usage: " << "hurricane <cmd> [arguments]" << std::endl;
     std::cout << "Commands : " << std::endl;
-    std::cout << "\tchecksum <file1> [ <file2> [...]]" << std::endl;
-    std::cout << "\tradare <database> <file1> [ <file2> [...]]" << std::endl;
+    std::cout << "\tchecksum <file1> [ <file2> [...]]\t\tdisplay files checksum" << std::endl;
+    std::cout << "\tradare <database> <file1> [ <file2> [...]] \tChecks if files have a footprint in the database" << std::endl;
+    std::cout << "\tradare <database> -r <basedir>\t\tChecks if files in a directory (recursively) have a footprint in the database" << std::endl;
 }
 
 int main(int argc, char ** argv){
@@ -35,10 +36,14 @@ int main(int argc, char ** argv){
         }
         return EXIT_SUCCESS;
     }else if(arguments.getRadareCmdFlag()){
-        std::vector<std::string> files = arguments.getFilesTargeted();
         CSVFilesDatabase db(arguments.getDatabasePath());
-        Radare radare(&files,&db);
-        radare.runScan();
+        Radare radare(&db);
+        if(arguments.getRecursiveFlag()){
+            radare.runScanInDirectory(arguments.getRecursiveBaseDir());
+        }else{
+            std::vector<std::string> files = arguments.getFilesTargeted();
+            radare.runScan(files);
+        }
         return EXIT_SUCCESS;
     }
     
