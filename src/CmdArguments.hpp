@@ -27,6 +27,24 @@
             */
             std::vector<std::string> getFilesTargeted();
 
+            /**
+            * Get database path in arguments for radare command
+            */
+            std::string getDatabasePath();
+
+            /**
+            * Get information if user use command "radare"
+            *
+            * @returns flag status
+            **/
+            bool getRadareCmdFlag();
+
+            /**
+            * Get information if user use command "checksum"
+            *
+            * @returns flag status
+            **/
+            bool getChecksumCmdFlag();
         protected:
             /**
             * Parse arguments for checksum command
@@ -37,8 +55,26 @@
             */
             bool parseChecksum(int argc, char ** argv);
 
-            // field with all files
+            /**
+            * Parse arguments for radare command
+            *
+            * @param[in] argc number of arguments
+            * @param[in] argv cmd arguments 
+            * @returns validate the correct execution
+            */
+            bool parseRadare(int argc, char ** argv);
+            
+            // all files in input
             std::vector<std::string> filesTargeted;
+            
+            // database path
+            std::string dbPath;
+            
+            // flag to signal if user use checksum command 
+            bool requestChecksum = false;
+            
+            // flag to signal if user use radare command 
+            bool requestRadare = false;
     };
 
 #endif
